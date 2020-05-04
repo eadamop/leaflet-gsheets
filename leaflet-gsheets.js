@@ -161,12 +161,15 @@ function addPoints(data) {
   // Wil be in pixels for circleMarker, metres for circle
   // Ignore for point
   var markerRadius = 100;
-
+  
+  alert(centerPosition.toString);
+  
   for (var row = 0; row < data.length; row++) {
-    
-    if (centerPosition.distanceTo( new L.LatLng(data[row].lat, data[row].lon) ) > 500000.0) {
+    var pointToConsider = new L.LatLng(data[row].lat, data[row].lon)
+    if (centerPosition.distanceTo( pointToConsider ) > 500000.0) {
         continue;
     }
+    alert("Found one point close to Central Position " + centerPosition.toString() + ". Point is: " + pointToConsider.toString);
     
     var marker;
     if (markerType == "circleMarker") {
@@ -233,7 +236,7 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - NEW_1!").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - NEW 2!").openPopup();
 
     L.circle(e.latlng, radius).addTo(map);
   
