@@ -54,6 +54,12 @@ var panelContent = {
 };
 sidebar.addPanel(panelContent);
 
+var filterCircle = L.circle(L.latLng(40, -75), 100000, {
+  opacity: 1,
+  weight: 1,
+  fillOpacity: 0.4
+}).addTo(map);  
+
 map.on("locationfound", onLocationFound);
 map.on("locationerror", onLocationError);
 map.on("click", function() {
@@ -220,17 +226,11 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XIXIXI").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XOXOXO").openPopup();
 
     L.circle(e.latlng, radius).addTo(map);
   
-    // NEW code: 
-    var filterCircle = L.circle(L.latLng(40, -75), RADIUS, {
-      opacity: 1,
-      weight: 1,
-      fillOpacity: 0.4
-    }).addTo(map);    
-  
+    // NEW code:  
     filterCircle.setLatLng(e.latlng);
   
     pointGroupLayer.setFilter(
