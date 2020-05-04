@@ -216,11 +216,18 @@ function getColor(type) {
 }
 
 function onLocationFound(e) {
-    var radius = e.accuracy;
+    var curRadius = e.accuracy;
 
     L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+        .bindPopup("You are within " + curRadius + " meters from this point").openPopup();
+    L.circle(e.latlng, curRadius).addTo(map);
 
-    L.circle(e.latlng, radius).addTo(map);
+    var RADIUS = 500000; 
+
+    // filterCircle.setLatLng(e.latlng);
+    pointGroupLayer.setFilter(
+      function showAirport(feature) {
+        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < RADIUS;
+      }
+    );
 }
-
