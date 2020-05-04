@@ -222,7 +222,16 @@ function onLocationFound(e) {
 
     L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-    L.circle(e.latlng, radius).addTo(map);
+    var filterCircle = L.circle(e.latlng, radius).addTo(map);
+  
+    // NEW code: 
+    filterCircle.setLatLng(e.latlng);
+  
+    pointGroupLayer.setFilter(
+      function showAirport(feature) {
+        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < 500000;
+      }
+    );
 }
 
 function onLocationError(e) {
