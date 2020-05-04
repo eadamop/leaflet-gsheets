@@ -5,6 +5,8 @@
  * The Sheets are then imported using Tabletop.js and overwrite the initially laded layers
  */
 
+var centerPosition = new L.LatLng(40, -100);
+
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -19,8 +21,6 @@ function init() {
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
-
-var centerPosition = new L.LatLng(40, -100);
 
 // Create a new Leaflet map centered on the continental US
 var map = L.map("map").setView([40, -100], 4);
@@ -252,7 +252,7 @@ function onLocationFound(e) {
   
     centerPosition = e.latlng;
     
-    Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true });
+    init();    
 }
 
 function onLocationError(e) {
