@@ -220,7 +220,7 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XAXAXA").openPopup();
 
     var filterCircle = L.circle(e.latlng, radius).addTo(map);
   
