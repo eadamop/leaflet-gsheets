@@ -20,6 +20,8 @@ function init() {
 }
 window.addEventListener("DOMContentLoaded", init);
 
+var centerPosition = new L.LatLng(40, -100);
+
 // Create a new Leaflet map centered on the continental US
 var map = L.map("map").setView([40, -100], 4);
 // var map = L.map("map").fitWorld();
@@ -54,7 +56,7 @@ var panelContent = {
 };
 sidebar.addPanel(panelContent);
 
-var filterCircle = L.circle(L.latLng(40, -75), 100000, {
+var filterCircle = L.circle(L.latLng(40, -75), 500000, {
   opacity: 1,
   weight: 1,
   fillOpacity: 0.4
@@ -161,6 +163,11 @@ function addPoints(data) {
   var markerRadius = 100;
 
   for (var row = 0; row < data.length; row++) {
+    
+    if (centerPosition.distanceTo( new L.LatLng(data[row].lat, data[row].lon) ) > 500.0) {
+        continue;
+    }
+    
     var marker;
     if (markerType == "circleMarker") {
       marker = L.circleMarker([data[row].lat, data[row].lon], {radius: markerRadius});
@@ -226,18 +233,23 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XOXOXO").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XEXEXE").openPopup();
 
     L.circle(e.latlng, radius).addTo(map);
   
     // NEW code:  
     filterCircle.setLatLng(e.latlng);
-  
-    pointGroupLayer.setFilter(
-      function showAirport(feature) {
-        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < 100000;
+    
+    /*
+    pointGroupLayer.setFilter(function showAirport(feature) {
+        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < 500000;
       }
     );
+    */
+  
+    centerPosition = e.latlng;
+    
+    Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true });
 }
 
 function onLocationError(e) {
