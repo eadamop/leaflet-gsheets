@@ -216,11 +216,11 @@ function getColor(type) {
 }
 
 function onLocationFound(e) {
-    var curRadius = e.accuracy;
+    var radius = e.accuracy;
 
     L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + curRadius + " meters from this point").openPopup();
-    L.circle(e.latlng, curRadius).addTo(map);
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+    L.circle(e.latlng, radius).addTo(map);
   /*
     var RADIUS = 500000; 
     // filterCircle.setLatLng(e.latlng);
