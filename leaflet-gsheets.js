@@ -220,16 +220,22 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XAXAXA").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XIXIXI").openPopup();
 
-    var filterCircle = L.circle(e.latlng, radius).addTo(map);
+    L.circle(e.latlng, radius).addTo(map);
   
     // NEW code: 
+    var filterCircle = L.circle(L.latLng(40, -75), RADIUS, {
+      opacity: 1,
+      weight: 1,
+      fillOpacity: 0.4
+    }).addTo(map);    
+  
     filterCircle.setLatLng(e.latlng);
   
     pointGroupLayer.setFilter(
       function showAirport(feature) {
-        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < 500000;
+        return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < 100000;
       }
     );
 }
