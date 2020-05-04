@@ -22,7 +22,8 @@ window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US
 var map = L.map("map").setView([40, -100], 4);
-map.locate({setView: true, maxZoom: 16});
+map.locate({setView: true, maxZoom: 6});
+map.on('locationfound', onLocationFound);
 
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
@@ -213,3 +214,13 @@ function getColor(type) {
     return "green";
   }
 }
+
+function onLocationFound(e) {
+    var radius = e.accuracy;
+
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+}
+
