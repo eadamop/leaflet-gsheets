@@ -21,11 +21,9 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US
-// var map = L.map("map").setView([40, -100], 4);
+var map = L.map("map").setView([40, -100], 4);
 // map.locate({setView: true, maxZoom: 6});
-var map = L.map("map").fitWorld();
-map.on("locationfound", onLocationFound);
-map.on("locationerror", onLocationError);
+// var map = L.map("map").fitWorld();
 
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
@@ -56,6 +54,8 @@ var panelContent = {
 };
 sidebar.addPanel(panelContent);
 
+map.on("locationfound", onLocationFound);
+map.on("locationerror", onLocationError);
 map.on("click", function() {
   sidebar.close(panelID);
 });
