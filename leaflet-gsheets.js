@@ -24,6 +24,7 @@ window.addEventListener("DOMContentLoaded", init);
 var map = L.map("map").setView([40, -100], 4);
 // map.locate({setView: true, maxZoom: 6});
 map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
 
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
@@ -224,5 +225,6 @@ function onLocationFound(e) {
     L.circle(e.latlng, radius).addTo(map);
 }
 
-map.on('locationfound', onLocationFound);
+function onLocationError(e) {
+    alert(e.message);
 }
