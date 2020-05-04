@@ -183,13 +183,17 @@ function addPoints(data) {
     });
 
     // AwesomeMarkers is used to create fancier icons
+    /*
     var icon = L.AwesomeMarkers.icon({
-      icon: "spinner",
+      icon: "info-point",
       iconColor: "white",
       markerColor: getColor(data[row].category),
       prefix: "glyphicon",
       extraClasses: "fa-rotate-0"
-    });
+    }); 
+    */
+    
+    var icon = L.AwesomeMarkers.icon({icon: 'coffee', prefix: 'fa', markerColor: 'red', iconColor: '#f28f82'});
     if (!markerType.includes("circle")) {
       marker.setIcon(icon);
     }
