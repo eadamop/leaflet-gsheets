@@ -164,7 +164,7 @@ function addPoints(data) {
 
   for (var row = 0; row < data.length; row++) {
     
-    if (centerPosition.distanceTo( new L.LatLng(data[row].lat, data[row].lon) ) > 500.0) {
+    if (centerPosition.distanceTo( new L.LatLng(data[row].lat, data[row].lon) ) > 500000.0) {
         continue;
     }
     
@@ -233,7 +233,7 @@ function getColor(type) {
 function onLocationFound(e) {
     var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - XEXEXE").openPopup();
+    L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point - NEW_1!").openPopup();
 
     L.circle(e.latlng, radius).addTo(map);
   
