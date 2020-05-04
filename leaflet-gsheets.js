@@ -223,7 +223,6 @@ function onLocationFound(e) {
     L.circle(e.latlng, curRadius).addTo(map);
 
     var RADIUS = 500000; 
-
     // filterCircle.setLatLng(e.latlng);
     pointGroupLayer.setFilter(
       function showAirport(feature) {
