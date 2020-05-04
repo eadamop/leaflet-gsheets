@@ -221,7 +221,7 @@ function onLocationFound(e) {
     L.marker(e.latlng).addTo(map)
         .bindPopup("You are within " + curRadius + " meters from this point").openPopup();
     L.circle(e.latlng, curRadius).addTo(map);
-
+  /*
     var RADIUS = 500000; 
     // filterCircle.setLatLng(e.latlng);
     pointGroupLayer.setFilter(
@@ -229,4 +229,5 @@ function onLocationFound(e) {
         return e.latlng.distanceTo(L.latLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0])) < RADIUS;
       }
     );
+    */
 }
